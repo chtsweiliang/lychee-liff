@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <title>玉荷包荔枝禮盒訂購</title>
+  <link rel="stylesheet" href="style.css">
+  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="hero-kicker">產地直送・當季限定</p>
+      <h1 id="shopName">玉荷包荔枝</h1>
+      <p class="hero-sub" id="shipNote"></p>
+    </div>
+  </header>
+
+  <div id="banner" class="banner" hidden></div>
+
+  <nav class="steps" aria-label="訂購步驟">
+    <ol>
+      <li data-step="1" class="active"><span>1</span>選購</li>
+      <li data-step="2"><span>2</span>資料</li>
+      <li data-step="3"><span>3</span>配送</li>
+      <li data-step="4"><span>4</span>確認</li>
+    </ol>
+  </nav>
+
+  <main>
+    <!-- 步驟 1：選擇規格與數量 -->
+    <section class="panel" data-panel="1">
+      <h2>選擇禮盒</h2>
+      <div class="product" data-sku="5">
+        <div class="product-badge"><b>5</b>台斤</div>
+        <div class="product-info">
+          <h3>玉荷包 5 台斤裝／盒</h3>
+          <p class="price" id="price5">—</p>
+        </div>
+        <div class="stepper" role="group" aria-label="5 台斤數量">
+          <button type="button" class="minus" aria-label="減少">−</button>
+          <input type="number" inputmode="numeric" min="0" value="0" id="qty5" aria-label="5 台斤盒數">
+          <button type="button" class="plus" aria-label="增加">＋</button>
+        </div>
+        <p class="subtotal">小計 <span id="sub5">NT$0</span></p>
+      </div>
+
+      <div class="product" data-sku="10">
+        <div class="product-badge"><b>10</b>台斤</div>
+        <div class="product-info">
+          <h3>玉荷包 10 台斤裝／盒</h3>
+          <p class="price" id="price10">—</p>
+        </div>
+        <div class="stepper" role="group" aria-label="10 台斤數量">
+          <button type="button" class="minus" aria-label="減少">−</button>
+          <input type="number" inputmode="numeric" min="0" value="0" id="qty10" aria-label="10 台斤盒數">
+          <button type="button" class="plus" aria-label="增加">＋</button>
+        </div>
+        <p class="subtotal">小計 <span id="sub10">NT$0</span></p>
+      </div>
+      <p class="hint" id="closeHint"></p>
+    </section>
+
+    <!-- 步驟 2：訂購人與收件人 -->
+    <section class="panel" data-panel="2" hidden>
+      <h2>訂購人資料</h2>
+      <label class="field">姓名<em>*</em>
+        <input id="name" autocomplete="name" maxlength="30" required>
+      </label>
+      <label class="field">聯繫電話<em>*</em>
+        <input id="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="0912345678" required>
+      </label>
+      <label class="field">電子郵件 (E-MAIL)
+        <input id="email" type="email" inputmode="email" autocomplete="email" maxlength="100" placeholder="選填">
+      </label>
+
+      <h2>收件人資料</h2>
+      <label class="check"><input type="checkbox" id="sameAsBuyer"> 收件人同訂購人</label>
+      <label class="field">收件人姓名<em>*</em>
+        <input id="rcptName" maxlength="30" required>
+      </label>
+      <label class="field">收件人電話<em>*</em>
+        <input id="rcptPhone" type="tel" inputmode="tel" maxlength="20" placeholder="0912345678" required>
+      </label>
+      <label class="field">收件人地址<em>*</em>
+        <textarea id="rcptAddr" rows="2" maxlength="150" autocomplete="street-address" placeholder="縣市、區、路名、門牌、樓層" required></textarea>
+      </label>
+      <label class="check"><input type="checkbox" id="remember" checked> 在這支手機記住我的資料，下次免填</label>
+    </section>
+
+    <!-- 步驟 3：配送與備註 -->
+    <section class="panel" data-panel="3" hidden>
+      <h2>希望到貨時段<em>*</em></h2>
+      <div class="chips" id="timeSlots" role="radiogroup"></div>
+
+      <h2>一樓大廳管理室代收<em>*</em></h2>
+      <div class="chips" role="radiogroup">
+        <label class="chip"><input type="radio" name="concierge" value="是"><span>是，可代收</span></label>
+        <label class="chip"><input type="radio" name="concierge" value="否"><span>否，本人簽收</span></label>
+      </div>
+
+      <h2>訂單備註 (給店家的話)</h2>
+      <label class="field">
+        <textarea id="note" rows="3" maxlength="300" placeholder="例如：送禮用請勿附價格、希望某日後出貨…"></textarea>
+        <small class="counter"><span id="noteCount">0</span>/300</small>
+      </label>
+    </section>
+
+    <!-- 步驟 4：確認 -->
+    <section class="panel" data-panel="4" hidden>
+      <h2>確認訂單內容</h2>
+      <div class="summary" id="summary"></div>
+      <label class="check consent"><input type="checkbox" id="consent">
+        我同意店家蒐集上述個人資料，僅用於本次訂單聯繫、出貨與售後服務。</label>
+    </section>
+
+    <!-- 完成 -->
+    <section class="panel done" data-panel="done" hidden>
+      <div class="done-icon">✓</div>
+      <h2>訂單已成立</h2>
+      <p class="order-id" id="doneOrderId"></p>
+      <div class="summary" id="doneSummary"></div>
+      <div class="payinfo">
+        <h3>付款資訊</h3>
+        <pre id="donePayInfo"></pre>
+        <p class="hint" id="doneDeadline"></p>
+      </div>
+      <p class="hint">訂單明細與付款資訊也已傳送到 LINE 聊天室，匯款後請在聊天室按「回報匯款」。</p>
+      <button type="button" class="btn primary block" id="btnClose">回到 LINE</button>
+      <button type="button" class="btn ghost block" id="btnAgain">再訂一筆</button>
+    </section>
+  </main>
+
+  <footer class="bar" id="bar">
+    <div class="bar-total">
+      <small>合計</small>
+      <strong id="total">NT$0</strong>
+    </div>
+    <div class="bar-actions">
+      <button type="button" class="btn ghost" id="btnPrev" hidden>上一步</button>
+      <button type="button" class="btn primary" id="btnNext">下一步</button>
+    </div>
+  </footer>
+
+  <div class="overlay" id="loading" hidden><div class="spinner"></div><p id="loadingText">處理中…</p></div>
+  <div class="toast" id="toast" role="alert" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
