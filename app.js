@@ -10,7 +10,7 @@
  */
 const CONFIG = {
   LIFF_ID: '',
-  API_URL: 'https://script.google.com/macros/s/AKfycbzw-f2OgqBWrpG2AHfP52w6I0Pe_dpYsP4k1_5-gTinAjwEB3u1zIRJT3BA_LcZVC_q/exec',
+  API_URL: 'https://script.google.com/macros/s/AKfycbwj5D8JDk8L9P2Owy0S8c3Zis8V_EEV-5Dde4aHvBVbWDT0obhwy5_MdFM_eIv9oYfK/exec',
 };
 
 const MOCK = new URLSearchParams(location.search).has('mock') || CONFIG.API_URL.includes('YOUR_');
