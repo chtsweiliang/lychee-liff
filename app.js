@@ -73,11 +73,11 @@ async function api(action, payload = {}) {
 
 // ---- 模擬資料（本機預覽用） ----
 const MOCK_CFG = {
-  shopName: '○○果園 大樹玉荷包（預覽模式）',
+  shopName: '陳家果園大樹玉荷包（預覽模式）',
   price5: 1200, price10: 2200, maxQty: 20,
   timeSlots: ['不指定', '13 時前', '14–18 時'],
   shippingNote: '含運（台灣本島），依採收狀況陸續出貨',
-  open: true, closedMessage: '', closeAt: '2026/12/04 23:59', oaId: '@demo', contact: '07-000-0000',
+  open: true, closedMessage: '', closeAt: '2026/12/04 23:59', oaId: '@demo',
 };
 let mockSeq = 0;
 async function mockApi(action, p) {
@@ -96,7 +96,6 @@ async function mockApi(action, p) {
         total: o.qty5 * MOCK_CFG.price5 + o.qty10 * MOCK_CFG.price10,
         rcptName: o.rcptName, rcptAddr: o.rcptAddr, timeSlot: o.timeSlot, concierge: o.concierge,
         payStatus: '未付款', status: '已成立', payDeadline: '2026/11/07',
-        paymentInfo: '銀行：○○銀行（代碼 000）○○分行\n帳號：000-000-000000\n戶名：○○○',
       },
     };
   }
@@ -404,7 +403,6 @@ async function submit() {
 function showDone(o) {
   $('#doneOrderId').textContent = '訂單編號 ' + o.orderId;
   renderSummary($('#doneSummary'), o, false);
-  $('#donePayInfo').textContent = o.paymentInfo || '';
   $('#doneDeadline').textContent = '請於 ' + o.payDeadline + ' 前完成匯款。';
   goStep('done');
 }
