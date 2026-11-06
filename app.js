@@ -142,6 +142,11 @@ function renderConfig() {
   $('#qty5').max = c.maxQty;
   $('#qty10').max = c.maxQty;
   $('#closeHint').textContent = c.closeAt ? '接單至 ' + c.closeAt + ' 止，售完為止。' : '';
+  // 頁首醒目顯示接單截止時間（後台修改後，重新開啟訂購頁即更新）
+  if (c.open && c.closeAt) {
+    $('#deadline').textContent = '⏰ 接單至 ' + c.closeAt + ' 止';
+    $('#deadline').hidden = false;
+  }
 
   const box = $('#timeSlots');
   box.textContent = '';
